@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMRITI — Memory Moments</title>
+    <link rel="stylesheet" href="memory-vault.css">
+</head>
+<body>
+<main class="vault-page">
+    <header class="vault-header">
+        <button class="back" onclick="goBack()">← Back</button>
+        <div class="brand"><span>🧠</span><div><strong>SMRITI</strong><small>Personal Memory Moments</small></div></div>
+        <button class="voice" onclick="speakMemories()" aria-label="Read memories aloud">🎙️</button>
+    </header>
+
+    <section class="hero">
+        <span class="eyebrow">PERSONAL MEMORY SPACE</span>
+        <h1>Memories that matter.</h1>
+        <p>Keep meaningful people, places, events and stories connected in one gentle, easy-to-use space.</p>
+        <div class="hero-actions">
+            <button class="primary" onclick="openAddMemory()">＋ Add a Memory</button>
+            <button class="secondary" onclick="loadMemories()">↻ Refresh</button>
+        </div>
+    </section>
+
+    <section class="memory-network" aria-label="Memory network">
+        <div class="network-node">👥<span>People</span></div>
+        <div class="connector">→</div>
+        <div class="network-node">📍<span>Places</span></div>
+        <div class="connector">→</div>
+        <div class="network-node">🎉<span>Events</span></div>
+        <div class="connector">→</div>
+        <div class="network-node">📖<span>Stories</span></div>
+    </section>
+
+    <section class="network-manager" aria-labelledby="networkTitle">
+        <div class="section-heading"><div><span class="eyebrow">CONNECTED MEMORIES</span><h2 id="networkTitle">Your family memory connections</h2></div></div>
+        <p class="network-help">Connect two saved memories to show how people, places, events and stories belong together.</p>
+        <div class="network-controls">
+            <label>First memory<select id="networkSource"><option value="">Choose a memory</option></select></label>
+            <label>Second memory<select id="networkTarget"><option value="">Choose a memory</option></select></label>
+            <label>How are they connected?<input id="networkLabel" maxlength="60" value="Related to" placeholder="e.g. happened at"></label>
+            <button class="primary" type="button" onclick="createMemoryConnection()">＋ Connect memories</button>
+        </div>
+        <p id="networkMessage" class="form-message" role="status"></p>
+        <div id="networkList" class="network-list"><p class="loading">Loading connections…</p></div>
+    </section>
+
+    <section class="context-cues" aria-labelledby="cueTitle">
+        <span class="eyebrow">GENTLE MEMORY PROMPTS</span>
+        <h2 id="cueTitle">A memory to revisit</h2>
+        <p>Optional prompts from memories your family has chosen to save.</p>
+        <div id="contextCueList" class="cue-list"><p class="loading">Loading saved prompts…</p></div>
+    </section>
+
+    <section class="memory-section">
+        <div class="section-heading">
+            <div><span class="eyebrow">MEMORY COLLECTION</span><h2>Your Memory Moments</h2></div>
+            <span id="memoryCount" class="count">0 memories</span>
+        </div>
+        <div class="memory-tools">
+            <label class="search-label" for="memorySearch">Search memories
+                <input id="memorySearch" type="search" placeholder="Search people, places, stories…" maxlength="100">
+            </label>
+            <label class="filter-label" for="categoryFilter">Category
+                <select id="categoryFilter">
+                    <option value="all">All memories</option><option value="Person">People</option>
+                    <option value="Place">Places</option><option value="Event">Events</option>
+                    <option value="Experience">Experiences</option><option value="Story">Stories</option>
+                </select>
+            </label>
+            <button class="secondary filter-button" type="button" onclick="loadMemories()">Search</button>
+        </div>
+        <div id="memoryGrid" class="memory-grid">
+            <div class="loading">Loading your memories…</div>
+        </div>
+    </section>
+
+    <p class="disclaimer">SMRITI is an assistive memory-support tool and is not a medical diagnostic system.</p>
+</main>
+
+<div id="memoryModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+        <button class="close" onclick="closeAddMemory()" aria-label="Close">×</button>
+        <span class="eyebrow">ADD PERSONAL CONTEXT</span>
+        <h2 id="modalTitle">Create a Memory Moment</h2>
+        <p class="modal-intro">Add only information you are comfortable storing.</p>
+        <form id="memoryForm" onsubmit="saveMemory(event)">
+            <input id="memoryId" type="hidden">
+            <label>Memory title *<input id="title" required maxlength="120" placeholder="e.g. Childhood Home"></label>
+            <div class="two-col">
+                <label>Category *
+                    <select id="category" required>
+                        <option value="Person">Person</option><option value="Place">Place</option>
+                        <option value="Event">Event</option><option value="Experience">Experience</option>
+                        <option value="Story">Story</option>
+                    </select>
+                </label>
+                <label>Importance
+                    <select id="importance"><option value="5">Very important</option><option value="4">Important</option><option value="3" selected>Meaningful</option><option value="2">Low</option><option value="1">Optional</option></select>
+                </label>
+            </div>
+            <div class="two-col">
+                <label>Person<input id="personName" maxlength="120" placeholder="Name"></label>
+                <label>Relationship<input id="relationship" maxlength="80" placeholder="Daughter, friend…"></label>
+            </div>
+            <div class="two-col">
+                <label>Place<input id="place" maxlength="120" placeholder="Home, school…"></label>
+                <label>Event<input id="eventName" maxlength="120" placeholder="Wedding, festival…"></label>
+            </div>
+            <div class="two-col">
+                <label>Year<input id="memoryYear" type="number" min="1900" max="2100" placeholder="1998"></label>
+                <label>Memory cue<input id="cue" maxlength="120" placeholder="Home, music, rain…"></label>
+            </div>
+            <label>Story / context<textarea id="story" maxlength="1000" rows="4" placeholder="What makes this memory meaningful?"></textarea></label>
+            <div class="two-col">
+                <label>Related people<input id="relatedPeople" maxlength="500" placeholder="e.g. Anita, Rohan"></label>
+                <label>Tags<input id="tags" maxlength="300" placeholder="family, childhood, celebration"></label>
+            </div>
+            <label>Photograph (JPG, PNG or WebP; max 5 MB)<input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+            <label>Audio memory (MP3, WAV, OGG, WebM or M4A; max 12 MB)<input id="audioFile" type="file" accept="audio/mpeg,audio/wav,audio/x-wav,audio/ogg,audio/webm,audio/mp4"></label>
+            <p class="upload-note">Only upload media you have permission to store. Your family account protects this profile in the pilot. Use fictional data and only upload media you have permission to store.</p>
+            <button id="saveMemoryButton" class="primary full" type="submit">Save Memory</button>
+        </form>
+        <p id="formMessage" class="form-message"></p>
+    </div>
+</div>
+<script src="/auth.js"></script>
+<script src="memory-vault.js"></script>
+<script src="/i18n.js"></script>
+<script src="/voice.js"></script>
+<script src="/reminder-alerts.js"></script>
+<script src="/nav.js"></script>
+</body>
+</html>

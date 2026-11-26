@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMRITI — Care Centre Overview</title>
+<style>
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f4f7f6;color:#19342f}
+.wrap{width:min(1100px,100%);margin:auto;padding:24px 18px 60px;box-sizing:border-box}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.top a{color:#244f45;font-weight:600}
+h1{font-size:30px;margin:14px 0 4px}.sub{color:#5d726c;margin:0 0 18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:#fff;border-radius:18px;padding:16px;box-shadow:0 7px 25px rgba(30,70,60,.05)}
+.stat span{display:block;color:#5d726c;font-size:13px}.stat b{font-size:28px}
+.card{background:#fff;border-radius:22px;padding:8px 18px;box-shadow:0 7px 25px rgba(30,70,60,.05);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{text-align:left;padding:13px 8px;border-bottom:1px solid #e6efed;font-size:15px}
+th{color:#5d726c;font-size:13px;font-weight:600}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:4px 12px;border-radius:999px;color:#fff;font-weight:700;font-size:13px}
+.attention{background:#b45309}.steady{background:#0f766e}.improving{background:#15803d}.insufficient_data{background:#64748b}
+button.open{border:0;background:#244f45;color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+.note{font-size:12.5px;color:#5d726c;margin-top:14px}
+</style></head>
+<body><div class="wrap">
+<div class="top"><a href="/index.html">← Home</a><a href="/caregiver.html">Caregiver dashboard</a></div>
+<h1>Care Centre Overview</h1>
+<p class="sub">Everyone you look after in one view. Profiles needing a gentle check-in appear first.</p>
+<div class="stats" id="stats"></div>
+<div class="card"><table><thead><tr><th>Name</th><th>Relationship</th><th>Sessions</th><th>Last activity</th><th>Recent score</th><th>Mood</th><th>Memories</th><th>Status</th><th></th></tr></thead><tbody id="rows"><tr><td colspan="9">Loading…</td></tr></tbody></table></div>
+<p class="note" id="note"></p>
+</div>
+<script src="/auth.js"></script>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+(async()=>{
+  try{
+    const r=await fetch("/api/care-centre/overview");const d=await r.json();if(!r.ok)throw new Error();
+    const ps=d.profiles,att=ps.filter(p=>p.status==="attention").length;
+    document.getElementById("stats").innerHTML=
+      `<div class="stat"><span>Profiles</span><b>${d.count} / ${d.limit}</b></div>
+       <div class="stat"><span>Worth a check-in</span><b style="color:#b45309">${att}</b></div>
+       <div class="stat"><span>Total sessions</span><b>${ps.reduce((a,p)=>a+p.sessions,0)}</b></div>
+       <div class="stat"><span>Memories saved</span><b>${ps.reduce((a,p)=>a+p.memories,0)}</b></div>`;
+    document.getElementById("rows").innerHTML=ps.length?ps.map(p=>`<tr>
+      <td><b>${esc(p.name)}</b></td><td>${esc(p.relationship)}</td><td>${p.sessions}</td>
+      <td>${p.last_activity?new Date(p.last_activity).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"—"}</td>
+      <td>${p.recent??"—"}</td><td>${esc(p.latest_mood||"—")}</td><td>${p.memories}</td>
+      <td><span class="pill ${esc(p.status)}">${esc(p.label)}</span></td>
+      <td><button class="open" data-id="${esc(p.id)}">Open</button></td></tr>`).join(""):"<tr><td colspan='9'>No profiles yet.</td></tr>";
+    document.querySelectorAll(".open").forEach(b=>b.onclick=()=>{localStorage.setItem("smriti_active_profile",b.dataset.id);location.href="/caregiver.html";});
+    document.getElementById("note").textContent=d.note+" Status compares recent activity with each person's own baseline.";
+  }catch(e){document.getElementById("rows").innerHTML="<tr><td colspan='9'>Could not load. Please sign in and refresh.</td></tr>";}
+})();
+</script><script src="/nav.js"></script>
+</body></html>

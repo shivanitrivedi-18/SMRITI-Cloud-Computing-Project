@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMRITI — Business Model | Pitch Fest</title>
+<style>
+:root{--ink:#16313a;--teal:#0f766e;--gold:#b45309;--bg:#f6faf9;--line:#d9e6e4}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+header{background:linear-gradient(135deg,#0f3d3e,#0f766e);color:#fff;padding:22px 18px}
+header h1{margin:0;font-size:26px}header p{margin:4px 0 0;opacity:.9}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:#fff;position:sticky;top:0;border-bottom:1px solid var(--line);z-index:5}
+nav button{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:999px;font-weight:600;white-space:nowrap;cursor:pointer;color:var(--ink)}
+nav button.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+main{max-width:980px;margin:0 auto;padding:16px}
+section{display:none}section.on{display:block}
+h2{margin:6px 0 12px}h3{margin:18px 0 6px;color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
+.card h4{margin:0 0 6px}ul{margin:6px 0 0 18px;padding:0}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#e8f3f1}
+.tablewrap{overflow-x:auto}.big{font-size:26px;font-weight:800;color:var(--teal)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.kpi span{font-size:12px;color:#527079;display:block}
+label{display:block;font-weight:600;margin-top:10px;font-size:14px}input[type=range]{width:100%}
+.note{font-size:12.5px;color:#527079;margin-top:10px}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0}summary{font-weight:700;cursor:pointer}
+.pos{color:#15803d}.neg{color:#b91c1c}
+a.back{color:#fff;text-decoration:underline;font-size:14px}
+</style></head>
+<body>
+<header><a class="back" href="/index.html">← Back to SMRITI app</a><h1>SMRITI — Business Model</h1>
+<p>AI-assisted memory-support platform for families of older adults · Pitch Fest 2026 · Software product</p></header>
+<nav id="tabs"></nav>
+<main>
+
+<section id="t0" class="on"><h2>1 · Production / Operations</h2>
+<div class="grid">
+<div class="card"><h4>Product &amp; uniqueness</h4><ul>
+<li><b>Personal Memory Vault</b>: family saves photos, voice notes, people &amp; places.</li>
+<li><b>Connected memories</b>: link people ↔ events ↔ places into a memory network.</li>
+<li><b>3 cognitive activities</b>: Memory Garden, Focus &amp; Find, My Daily Story.</li>
+<li><b>Adaptive difficulty</b> + <b>trend forecast &amp; early check-in flag</b> against the person's own baseline.</li>
+<li><b>Caregiver dashboard</b>, reminders, mood check-ins, voice guidance, private family profiles.</li></ul></div>
+<div class="card"><h4>Why it is different</h4><ul>
+<li>Generic brain-games are not personalised; SMRITI uses the person's <i>own</i> life memories.</li>
+<li>Built for the family caregiver, not only the patient.</li>
+<li>Designed for Indian families (full Hindi interface is on the roadmap; simple WhatsApp-style flow, low price).</li></ul></div>
+<div class="card"><h4>Production process (software)</h4><ul>
+<li>Agile 2-week sprints: design → build → test → release.</li>
+<li>Stack: HTML/CSS/JS + FastAPI (Python) + SQLite → PostgreSQL at scale.</li>
+<li>Statistical engine (EWMA + least-squares trend) in pure Python — no costly GPU.</li>
+<li>Continuous backups; staged releases; user feedback loop.</li></ul></div>
+<div class="card"><h4>Resources required ("raw material")</h4><ul>
+<li>Cloud VPS (2 vCPU / 4 GB): ₹1,500–3,000 / month</li>
+<li>Object storage for photos/audio: ~₹1 per user / month</li>
+<li>Domain + SSL: ~₹800 / year</li>
+<li>Payment gateway: ~2% per transaction</li>
+<li>Founder laptop (already owned)</li></ul></div>
+<div class="card"><h4>Capacity planning</h4><ul>
+<li>One VPS comfortably serves ~2,000 family profiles (planning estimate; load-test before launch).</li>
+<li>Scale step: managed PostgreSQL + object storage at ~1,500 users (+₹4,000/month).</li>
+<li>Support capacity: 1 part-time executive per ~300 paying families.</li></ul></div>
+<div class="card"><h4>Quality control &amp; "inventory"</h4><ul>
+<li>Automated syntax/unit checks before every release; private-profile access tests.</li>
+<li>Clinician/psychologist advisor reviews activity content and wording.</li>
+<li>Digital inventory: activity library, memory media (size-limited), daily encrypted backups.</li>
+<li>Privacy by design: hashed passwords, per-profile access checks, no real data in demo.</li></ul></div>
+</div></section>
+
+<section id="t1"><h2>2 · Marketing Management</h2>
+<div class="grid">
+<div class="card"><h4>Market need</h4><p>An estimated <span class="big">5.3 million</span> people over 60 live with dementia in India (ARDSI, <i>Dementia in India 2020</i>), and each has family caregivers who face heavy emotional and physical strain. India's 60+ population is projected to reach ~19% by 2050.</p></div>
+<div class="card"><h4>Target customers</h4><ul>
+<li><b>Primary:</b> adult children (35–60) of seniors with memory concerns — urban &amp; tier-2 cities.</li>
+<li><b>Secondary:</b> old-age homes, day-care centres, memory clinics, NGOs.</li>
+<li><b>Influencers:</b> neurologists, geriatricians, psychologists.</li></ul></div>
+<div class="card"><h4>Segmentation</h4><ul><li>Early memory concerns (prevention &amp; engagement)</li><li>Diagnosed mild stages (structured routine)</li><li>Institutions (many profiles, one dashboard)</li></ul></div>
+</div>
+<h3>Competitor analysis</h3>
+<div class="tablewrap"><table><tr><th>Option</th><th>Personalised with family memories</th><th>Caregiver dashboard</th><th>Indian-language ready</th><th>Affordable for India</th></tr>
+<tr><td>Generic brain-training apps</td><td>No</td><td>Limited</td><td>Limited</td><td>Often priced in USD</td></tr>
+<tr><td>Paper scrapbooks / photo albums</td><td>Yes (manual)</td><td>No</td><td>Yes</td><td>Yes, but no tracking</td></tr>
+<tr><td>Clinic cognitive therapy</td><td>Sometimes</td><td>Yes</td><td>Yes</td><td>Costly &amp; occasional</td></tr>
+<tr><td><b>SMRITI</b></td><td><b>Yes</b></td><td><b>Yes</b></td><td><b>Yes (planned)</b></td><td><b>₹199 / month</b></td></tr></table></div>
+<div class="grid" style="margin-top:12px">
+<div class="card"><h4>Pricing strategy</h4><ul>
+<li><b>Free:</b> 1 profile, basic activities — builds trust.</li>
+<li><b>Family ₹199/month</b> (₹1,999/yr): up to 3 profiles, memory media, forecast, reports.</li>
+<li><b>Care Centre ₹1,499/month</b>: up to 25 profiles, care-centre overview of every resident.</li>
+<li>Value anchor: less than one doctor-visit snack-bill per month.</li></ul></div>
+<div class="card"><h4>Promotion</h4><ul>
+<li>Hindi/English YouTube &amp; Instagram reels: "5 memory games for your parents".</li>
+<li>WhatsApp &amp; Facebook caregiver communities.</li>
+<li>Free awareness sessions with ARDSI-type NGOs and old-age homes.</li>
+<li>Doctor referral cards; Alzheimer's Awareness Month campaigns.</li></ul></div>
+<div class="card"><h4>Sales &amp; distribution</h4><ul>
+<li>Web app / installable PWA — no app-store dependency.</li>
+<li>Free tier → in-app upgrade (UPI / cards via payment gateway).</li>
+<li>Direct B2B demos to care homes &amp; clinics.</li></ul></div></div></section>
+
+<section id="t2"><h2>3 · Human Resource Management</h2>
+<div class="grid">
+<div class="card"><h4>Organisation</h4><p>Lean startup: Founder-CEO/CTO leads product &amp; engineering; a part-time Care Success Executive handles families; a clinical advisor guides content. Roles are added as revenue grows.</p></div>
+<div class="card"><h4>Recruitment &amp; training</h4><ul><li>Recruit through college placement cells and internships.</li><li>2-week onboarding on empathy, privacy and the product.</li><li>Monthly review of support tickets and feedback.</li></ul></div></div>
+<h3>Manpower plan &amp; estimated HR cost</h3>
+<div class="tablewrap"><table><tr><th>Role</th><th>When</th><th>Responsibility</th><th>Cost</th></tr>
+<tr><td>Founder (product + development)</td><td>Day 1</td><td>Product, engineering, sales, finance</td><td>₹0 salary in Year 1 (reinvested)</td></tr>
+<tr><td>Care Success Executive (part-time)</td><td>Month 3</td><td>Onboarding, support calls, feedback</td><td>₹10,000 / month</td></tr>
+<tr><td>Clinical advisor (psychologist / neurologist)</td><td>Pre-launch</td><td>Review content &amp; wording</td><td>₹20,000 one-time honorarium</td></tr>
+<tr><td>Full-stack developer</td><td>Year 2 (after break-even)</td><td>Features, scaling, security</td><td>₹30,000 / month</td></tr>
+<tr><td>Marketing intern</td><td>Year 2</td><td>Content, community, NGO outreach</td><td>₹8,000 / month</td></tr></table></div>
+<p class="note">Year-1 recurring HR expense in the model below: ₹10,000 / month. Figures are planning estimates.</p></section>
+
+<section id="t3"><h2>4 · Finance, Procurement &amp; Profitability</h2>
+<div class="grid">
+<div class="card"><h4>Initial investment: ₹1,50,000</h4>
+<table><tr><td>Security review &amp; legal registration</td><td>₹30,000</td></tr><tr><td>Cloud, domain &amp; tools (6-month buffer)</td><td>₹25,000</td></tr><tr><td>Launch marketing</td><td>₹50,000</td></tr><tr><td>Clinical advisor honorarium</td><td>₹20,000</td></tr><tr><td>Contingency</td><td>₹25,000</td></tr><tr><td><b>Total</b></td><td><b>₹1,50,000</b></td></tr></table></div>
+<div class="card"><h4>Procurement &amp; unit cost (per paying family / month)</h4>
+<table><tr><td>Cloud + storage share</td><td>₹12</td></tr><tr><td>Payment gateway (~2%)</td><td>₹4</td></tr><tr><td>Support / SMS share</td><td>₹8</td></tr><tr><td><b>Variable cost</b></td><td><b>₹24</b></td></tr><tr><td>Price</td><td>₹199</td></tr><tr><td><b>Contribution margin</b></td><td><b>₹175 (88%)</b></td></tr></table></div>
+<div class="card"><h4>Fixed monthly costs</h4>
+<table><tr><td>Base hosting</td><td>₹3,000</td></tr><tr><td>Tools &amp; software</td><td>₹2,000</td></tr><tr><td>Marketing</td><td>₹15,000</td></tr><tr><td>HR (part-time support)</td><td>₹10,000</td></tr><tr><td><b>Total</b></td><td><b>₹30,000</b></td></tr></table></div></div>
+
+<h3>Live profit calculator (change the sliders)</h3>
+<div class="card">
+<label>Monthly price per family: ₹<span id="vPrice"></span><input id="price" type="range" min="99" max="499" step="10" value="199"></label>
+<label>Variable cost per family: ₹<span id="vVar"></span><input id="varc" type="range" min="10" max="80" step="1" value="24"></label>
+<label>Fixed monthly cost: ₹<span id="vFix"></span><input id="fix" type="range" min="10000" max="80000" step="1000" value="30000"></label>
+<label>Paying families (month 12 target): <span id="vUsers"></span><input id="users" type="range" min="50" max="1500" step="10" value="400"></label>
+<label>Initial investment: ₹<span id="vInv"></span><input id="inv" type="range" min="50000" max="500000" step="10000" value="150000"></label>
+<div class="kpis" id="kpis"></div>
+<svg id="chart" viewBox="0 0 640 220" style="width:100%;height:auto" role="img" aria-label="Cumulative profit over 12 months"></svg>
+<p class="note">Chart: cumulative cash position over 12 months (starts at −investment), assuming paying families grow linearly to the month-12 target. Figures are planning assumptions, not guarantees; validate with a pilot of 20–50 families.</p></div>
+<p class="note"><b>Base case:</b> 400 families × ₹199 = ₹79,600 revenue/month at month 12 → profit = ₹40,000/month. Break-even ≈ 172 paying families.</p></section>
+
+<section id="t4"><h2>5 · Question &amp; Answer</h2>
+<details><summary>Is SMRITI a medical device / does it diagnose dementia?</summary>No. It is an assistive memory-support and activity tool. It never diagnoses; its trend flag only compares a person's recent activity with their own baseline and suggests a check-in or a doctor visit.</details>
+<details><summary>Where is the AI?</summary>Adaptive difficulty and a statistical trend engine (composite score, exponential moving average, least-squares trend and 3-session projection). It is rule-based and statistical, not a trained deep-learning model — which keeps it explainable, cheap and private. Roadmap: language-model reminiscence companion once clinically reviewed.</details>
+<details><summary>How do you make money and what are your margins?</summary>Family subscription ₹199/month with ~₹24 variable cost (88% contribution margin) and a Care-Centre plan at ₹1,499/month. Break-even is about 172 paying families.</details>
+<details><summary>How did you get ₹1.5 lakh and when do you recover it?</summary>Founder savings / small grant or incubator support. At the base case (profit ₹40,000/month at month 12) cumulative cash turns positive in about 14 months — see the calculator.</details>
+<details><summary>Why would families pay when free games exist?</summary>Free games are generic. SMRITI uses the family's own photos, voices and stories, gives the caregiver a dashboard, and flags changes early — the reason families pay is connection plus peace of mind.</details>
+<details><summary>How do you protect sensitive data?</summary>Password hashing, private per-profile access checks, authenticated media, size-limited uploads. Before real launch: HTTPS-only cookies, encrypted backups, security review and a privacy policy compliant with India's DPDP Act. The demo uses fictional data only.</details>
+<details><summary>Who are your competitors and what is your edge?</summary>Generic brain-training apps, scrapbooks and clinic therapy. Edge: personal memories + caregiver dashboard + Indian-language focus + low price.</details>
+<details><summary>What if raw material (cloud) costs rise?</summary>Cloud and storage are about 10% of revenue at base case; costs scale with users, and annual plans plus a small price rise absorb increases.</details>
+<details><summary>How will you acquire the first 100 customers?</summary>NGO and old-age-home pilots, doctor referrals, caregiver WhatsApp communities and Hindi video content; free tier converts a share to paid.</details>
+<details><summary>What is the biggest risk?</summary>Trust and low digital literacy of seniors. Mitigation: simple large-button elder mode, voice guidance, family-led setup, and a support executive.</details>
+<p class="note">Source for prevalence: ARDSI, "Dementia in India 2020" report. All financial figures are planning estimates.</p></section>
+</main>
+<script>
+const tabs=["Operations","Marketing","HR","Finance","Q&A"];
+const nav=document.getElementById("tabs");
+tabs.forEach((t,i)=>{const b=document.createElement("button");b.textContent=`${i+1}. ${t}`;b.onclick=()=>show(i);nav.appendChild(b);});
+function show(i){document.querySelectorAll("section").forEach((s,k)=>s.classList.toggle("on",k===i));[...nav.children].forEach((b,k)=>b.classList.toggle("on",k===i));window.scrollTo(0,0);}
+show(0);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const g=id=>+document.getElementById(id).value;
+function calc(){
+  const price=g("price"),vc=g("varc"),fix=g("fix"),users=g("users"),inv=g("inv");
+  [["vPrice",price],["vVar",vc],["vFix",fix.toLocaleString("en-IN")],["vUsers",users],["vInv",inv.toLocaleString("en-IN")]].forEach(([id,v])=>document.getElementById(id).textContent=v);
+  const cm=price-vc, be=cm>0?Math.ceil(fix/cm):Infinity;
+  const rev=users*price, cost=users*vc+fix, profit=rev-cost, margin=rev?profit/rev*100:0;
+  // 12-month linear ramp of paying families
+  let cum=-inv, pts=[cum], payback=null, yr1=0;
+  for(let m=1;m<=12;m++){const u=users*m/12;const p=u*cm-fix;cum+=p;yr1+=u*price;pts.push(cum);}
+  // extend to 36 months at the month-12 level to find payback
+  let c2=cum; let m2=12; if(cum>=0){payback=pts.findIndex(v=>v>=0);} else {const mp=users*cm-fix; if(mp>0){while(c2<0&&m2<120){c2+=mp;m2++;} payback=m2;}}
+  const k=[["Monthly revenue (month 12)",inr(rev)],["Monthly profit (month 12)",`<b class="${profit>=0?"pos":"neg"}">${inr(profit)}</b>`],["Profit margin",margin.toFixed(0)+"%"],["Break-even families",isFinite(be)?be:"n/a"],["Year-1 revenue",inr(yr1)],["Investment payback",payback?payback+" months":"not reached"]];
+  document.getElementById("kpis").innerHTML=k.map(([a,b])=>`<div class="kpi"><span>${a}</span><b style="font-size:18px">${b}</b></div>`).join("");
+  const W=640,H=220,P=40,lo=Math.min(...pts,0),hi=Math.max(...pts,1),x=i=>P+(W-2*P)*i/12,y=v=>H-P-(H-2*P)*(v-lo)/(hi-lo||1);
+  const line=pts.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
+  const labels=[0,3,6,9,12].map(i=>`<text x="${x(i)}" y="${H-12}" font-size="11" text-anchor="middle" fill="#527079">M${i}</text>`).join("");
+  document.getElementById("chart").innerHTML=`<line x1="${P}" x2="${W-P}" y1="${y(0)}" y2="${y(0)}" stroke="#94a3b8" stroke-dasharray="4 4"/><text x="4" y="${y(0)+4}" font-size="11" fill="#527079">0</text><polyline points="${line}" fill="none" stroke="#0f766e" stroke-width="3"/>${labels}<text x="${W-P}" y="${y(pts[12])-8}" font-size="11" text-anchor="end" fill="#0f766e">${inr(pts[12])}</text>`;
+}
+document.querySelectorAll("input[type=range]").forEach(i=>i.addEventListener("input",calc));calc();
+</script>
+<script src="/nav.js"></script>
+</body></html>
